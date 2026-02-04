@@ -10,7 +10,8 @@ To run this analysis use 'python -m part1.analysis' in root directory
 5. Final analysis
 """
 from .variants import variant1
-from functions import tf_idf_cosine, merge_sort
+from functions import tf_idf_cosine, merge_sort, transpose_with_threshold
+import csv
 
 """
 STEP 1: Data cleaning
@@ -55,12 +56,43 @@ results = tf_idf_cosine(info, variant1)
 
 """
 STEP 4: Merge Sort
-The similarity scores for each NFR are stored in descending order using merge sort.
-Merge sort is used because of the worst case O(n log n) and the results are predictable.
+    The similarity scores for each NFR are stored in descending order using merge sort. Merge sort is used because 
+of the worst case O(n log n) and the results are predictable.
+    The results shown are the top 10 similarity scores for each NFR. These results hint that this variant
+does not produce very optimal results as many of these scores are not represented in the actual trace. For example,
+the top result (and the highest similarity score for every NFR) for NFR3 says that FR18 is very similar to it, but when
+looking at the given trace (trace-3nfr-60fr.txt) there is no similarity as shown be the third value being 0 in "FR18,1,0,0".
 """
-nfr1_trace = merge_sort(results["NFR1"])
-nfr2_trace = merge_sort(results["NFR2"])
-nfr3_trace = merge_sort(results["NFR3"])
+sorted_results = [merge_sort(results["NFR1"]), merge_sort(results["NFR2"]), merge_sort(results["NFR3"])]
+i = 0
+for result in sorted_results:
+    i += 1
+    print(f"""NFR{i} --------------------------------
+    1: {result[0]}
+    2: {result[1]}
+    3: {result[2]}
+    4: {result[3]}
+    5: {result[4]}
+    6: {result[5]}
+    7: {result[6]}
+    8: {result[7]}
+    9: {result[8]}
+    10: {result[9]}
+    """)
 
-print(nfr1_trace)
+"""
+STEP 5: Final Analysis
+    The results are transposed to match the format of the given trace results.
+    This trace confirms the results from variant 1 are not optimal. This makes sense
+as the only preprocessing done was tokenization. This shows in the example of FR18. In the given
+set the only similarity it has is traced to NFR1, but in these results it also has a strong similarity with NFR3.
+The words "recycled" and "adjuster" contribute to this as they are used multiple times in FR18 and NFR3. Tokenization is
+not enough for tracing similarity, result should be stronger in variant 2 where stop words are introduced.
+"""
+fr_view = transpose_with_threshold(results, 0.18)
+
+with open("trace_variant1.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+    for fr, values in fr_view.items():
+        writer.writerow([fr] + values)
 #endregion

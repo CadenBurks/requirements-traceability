@@ -26,6 +26,35 @@ def tf_idf_cosine(info, variant_function):
             result[keys[i]].append((keys[j], similarity[i][j]))
     return result
 
+# def apply_threshold(trace: list, threshold: float):
+#     result = []
+#     for x in trace:
+#         if x[1] > threshold:
+#             result.append((x[0], 1, x[1]))
+#         else:
+#             result.append((x[0], 0, x[1]))
+#     return result
+
+def transpose_with_threshold(results, threshold=0.14):
+    frs_result = {}
+    nfr_keys = list(results.keys())
+
+    all_frs = []
+    for res in results[nfr_keys[0]]:
+        all_frs.append(res[0])
+
+    for fr in all_frs:
+        frs_result[fr] = []
+        for nfr in nfr_keys:
+            score = 0
+            for res in results[nfr]:
+                if res[0] == fr:
+                    score = res[1]
+                    break
+            frs_result[fr].append(1 if score > threshold else 0)
+    
+    return frs_result
+
 def merge(left_array, right_array):
     """
     Helper function for merge_sort
