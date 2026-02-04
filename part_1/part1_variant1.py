@@ -39,7 +39,7 @@ for line in data:
 
 """
 PRE-PROCESSING
-The 1st of the 3 variants will only use preprocessing
+The 1st of the 3 variants will only use tokenization
 """
 def variant1(info: dict):
     result = {}
