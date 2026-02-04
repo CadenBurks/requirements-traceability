@@ -64,21 +64,21 @@ the top result (and the highest similarity score for every NFR) for NFR3 says th
 looking at the given trace (trace-3nfr-60fr.txt) there is no similarity as shown be the third value being 0 in "FR18,1,0,0".
 """
 sorted_results = [merge_sort(results["NFR1"]), merge_sort(results["NFR2"]), merge_sort(results["NFR3"])]
-i = 0
-for result in sorted_results:
-    i += 1
-    print(f"""NFR{i} --------------------------------
-    1: {result[0]}
-    2: {result[1]}
-    3: {result[2]}
-    4: {result[3]}
-    5: {result[4]}
-    6: {result[5]}
-    7: {result[6]}
-    8: {result[7]}
-    9: {result[8]}
-    10: {result[9]}
-    """)
+
+while True:
+    try:
+        top_n = int(input("How many results to show for NFR->FR trace? (MAX 60): "))
+        if 0 < top_n <= 60:
+            break
+    except ValueError:
+        print("Invalid Input")
+
+with open("top_n_results_variant1.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerow(["NFR", "Rank", "FR", "Similarity"])
+    for i, nfr_results in enumerate(sorted_results, start=1):
+        for rank, (fr, score) in enumerate(nfr_results[:top_n], start=1):
+            writer.writerow([f"NFR{i}", rank, fr, f"{score:.3f}"])
 
 """
 STEP 5: Final Analysis
