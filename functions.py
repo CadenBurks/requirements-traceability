@@ -19,21 +19,11 @@ def tf_idf_cosine(info, variant_function):
         keys[1]: [],
         keys[2]: [],
     }
+
     for i in nfr_indices:
-        #print(f"NFR{i+1}")
         for j in range(3, len(keys)):
-            #print(f"{keys[j]}, {similarity[i][j]}")
             result[keys[i]].append((keys[j], similarity[i][j]))
     return result
-
-# def apply_threshold(trace: list, threshold: float):
-#     result = []
-#     for x in trace:
-#         if x[1] > threshold:
-#             result.append((x[0], 1, x[1]))
-#         else:
-#             result.append((x[0], 0, x[1]))
-#     return result
 
 def transpose_with_threshold(results, threshold=0.14):
     frs_result = {}
