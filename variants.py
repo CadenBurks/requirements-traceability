@@ -18,6 +18,7 @@ Websites/Documents used:
 - https://www.nltk.org/api/nltk.tag.pos_tag.html
 - https://www.nltk.org/api/nltk.stem.wordnet.html#nltk.stem.wordnet.WordNetLemmatizer
 - https://stackoverflow.com/questions/15586721/wordnet-lemmatization-and-pos-tagging-in-python
+- https://www.nltk.org/howto/wordnet.html
 
 """
 from nltk.tokenize import word_tokenize
@@ -36,6 +37,20 @@ def get_wordnet_pos(tag):
     elif tag.startswith("R"):
         return wordnet.ADV
     return wordnet.NOUN
+
+def wordnet_expansion(word, POS, num_synonyms):
+    synonyms = set()
+
+    # Only use the synset that has the common meaning for the Part of Speech (...[:1])
+    for synset in wordnet.synsets(word, POS)[:1]:
+        for lemma in synset.lemmas():
+            name = lemma.name().lower()
+            if name.isalpha() and name != word:
+                synonyms.add(name)
+            if len(synonyms) >= num_synonyms:
+                break
+    
+    return list(synonyms)
 
 """
 PRE-PROCESSING
@@ -90,12 +105,18 @@ def variant3(info: dict):
     for id, text in info.items():
         tokens = word_tokenize(text.lower())
         tagged = pos_tag(tokens)
+        expanded = []
 
-        lemmatized = [lemmatizer.lemmatize(word, get_wordnet_pos(tag)) 
-                      for word, tag in tagged if word.isalpha() 
-                      and word not in stop_words]
+        for word, tag in tagged:
+            if word.isalpha() and word not in stop_words:
+                pos = get_wordnet_pos(tag)
+                lemma = lemmatizer.lemmatize(word, pos) 
+                expanded.append(lemma)
 
-        result[id] = lemmatized
+                synonyms = wordnet_expansion(lemma, pos, 1)
+                expanded.extend(synonyms)
+        
+        result[id] = expanded
 
     for key in result:
         key_list.append(key)

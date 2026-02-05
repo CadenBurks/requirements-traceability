@@ -1,6 +1,6 @@
 """
-Analysis for part 1 of the traceability assignment
-To run this analysis use 'python -m part1.analysis' in root directory
+Analysis for part 2 of the traceability assignment
+To run this analysis use 'python -m part2.analysis' in root directory
 
 1. Data cleaning
 ----Below repeated for each variant----
@@ -16,9 +16,9 @@ import csv
 """
 STEP 1: Data cleaning
 Given requirements are read from the file.
-Requirements are cleaned by removing NFR categories and removing white space and stored in a dictionary to prepare for preprocessing.
+Requirements are cleaned by removing NFR labels and white space and stored in a dictionary to prepare for preprocessing.
 """
-with open("./text_files/requirements-3nfr-60fr.txt", "r") as file:
+with open("./text_files/requirements-p2.txt", "r") as file:
     data = file.readlines()
 
 info = {}
@@ -64,7 +64,7 @@ of the worst case O(n log n) and the results are predictable.
     The results shown are the top n similarity scores for each NFR. These results hint that this variant
 does not produce very optimal results as many of these scores are not represented in the actual trace. For example,
 the top result (and the highest similarity score for every NFR) for NFR3 says that FR18 is very similar to it, but when
-looking at the given trace (trace-3nfr-60fr.txt) there is no similarity as shown by the third value being 0 in "FR18,1,0,0".
+looking at the given trace (trace-3nfr-60fr.txt) there is no similarity as shown be the third value being 0 in "FR18,1,0,0".
 """
 sorted_results = [merge_sort(results["NFR1"]), merge_sort(results["NFR2"]), merge_sort(results["NFR3"])]
 
@@ -76,7 +76,7 @@ while True:
     except ValueError:
         print("Invalid Input")
 
-with open("top_n_results_variant1.csv", "w", newline="") as file:
+with open("p2_top_n_results_variant1.csv", "w", newline="") as file:
     writer = csv.writer(file)
     writer.writerow(["NFR", "Rank", "FR", "Similarity"])
     for i, nfr_results in enumerate(sorted_results, start=1):
@@ -96,7 +96,7 @@ both NFR1 and NFR2 but in this trace, FR9 is only traced to NFR1 because NFR2 do
 """
 fr_view = transpose_with_threshold(results, 0.09)
 
-with open("trace_variant1.csv", "w", newline="") as file:
+with open("p2_trace_variant1.csv", "w", newline="") as file:
     writer = csv.writer(file)
     for fr, values in fr_view.items():
         writer.writerow([fr] + values)
@@ -107,7 +107,7 @@ with open("trace_variant1.csv", "w", newline="") as file:
 STEP 2: Preprocessing
 Variant 2 uses tokenization and stop word removal.
 Removing stop words should help because it reduces filler words that hold no significance and 
-leads to more meaningful word matches.
+leads to stronger word matches.
 The variant2 function is invoked in the tf_idf_cosine function during step 3 for simplicity.
 """
 """
@@ -126,7 +126,7 @@ results = tf_idf_cosine(info, variant2)
 STEP 4: Merge Sort
     The similarity scores for each NFR are stored in descending order using merge sort. Merge sort is used because 
 of the worst case O(n log n) and the results are predictable.
-    The results shown are the top n similarity scores for each NFR. These results are more consistent than variant 1.
+    The results shown are the top n similarity scores for each NFR. These results are not
 """
 sorted_results = [merge_sort(results["NFR1"]), merge_sort(results["NFR2"]), merge_sort(results["NFR3"])]
 
@@ -138,7 +138,7 @@ while True:
     except ValueError:
         print("Invalid Input")
 
-with open("top_n_results_variant2.csv", "w", newline="") as file:
+with open("p2_top_n_results_variant2.csv", "w", newline="") as file:
     writer = csv.writer(file)
     writer.writerow(["NFR", "Rank", "FR", "Similarity"])
     for i, nfr_results in enumerate(sorted_results, start=1):
@@ -157,7 +157,7 @@ how similar words between requirements are, despite the intent of the wording or
 """
 fr_view = transpose_with_threshold(results, 0.09)
 
-with open("trace_variant2.csv", "w", newline="") as file:
+with open("p2_trace_variant2.csv", "w", newline="") as file:
     writer = csv.writer(file)
     for fr, values in fr_view.items():
         writer.writerow([fr] + values)
@@ -167,7 +167,7 @@ with open("trace_variant2.csv", "w", newline="") as file:
 """
 STEP 2: Preprocessing
 Variant 3 does tokenization, stop word removal, and lemmatization with POS tagging. This
-improves similarity traces by reducing words to their base form.
+improves similarity traces since words are reduced to their base form.
 The variant3 function is invoked in the tf_idf_cosine function during step 3 for simplicity.
 """
 """
@@ -186,7 +186,10 @@ results = tf_idf_cosine(info, variant3)
 STEP 4: Merge Sort
     The similarity scores for each NFR are stored in descending order using merge sort. Merge sort is used because 
 of the worst case O(n log n) and the results are predictable.
-    The results shown are the top n similarity scores for each NFR. These results are more consistent than the previous 2.
+    The results shown are the top 10 similarity scores for each NFR. These results hint that this variant
+does not produce very optimal results as many of these scores are not represented in the actual trace. For example,
+the top result (and the highest similarity score for every NFR) for NFR3 says that FR18 is very similar to it, but when
+looking at the given trace (trace-3nfr-60fr.txt) there is no similarity as shown be the third value being 0 in "FR18,1,0,0".
 """
 sorted_results = [merge_sort(results["NFR1"]), merge_sort(results["NFR2"]), merge_sort(results["NFR3"])]
 
@@ -198,7 +201,7 @@ while True:
     except ValueError:
         print("Invalid Input")
 
-with open("top_n_results_variant3.csv", "w", newline="") as file:
+with open("p2_top_n_results_variant3.csv", "w", newline="") as file:
     writer = csv.writer(file)
     writer.writerow(["NFR", "Rank", "FR", "Similarity"])
     for i, nfr_results in enumerate(sorted_results, start=1):
@@ -209,14 +212,14 @@ with open("top_n_results_variant3.csv", "w", newline="") as file:
 STEP 5: Final Analysis
     The results are transposed to match the format of the given trace results.
     
-    This is the most effective variant of the 3 that were tested. Lemmatization helps with matching words
+    This is the most optimal variant of the 3. Lemmatization helps with matching words
 that have different forms so if a word is in different forms between requirements they can
-still be seen as similar, and POS tagging helps lemmatize words using the proper form like nouns, verbs, etc. 
-This, however, does not account for synonyms and the intent of the wording can only be partially accounted for.
+still be seen as similar. This, however, does not account for synonyms and the intent of the 
+wording can only be partially accounted for.
 """
-fr_view = transpose_with_threshold(results, 0.12)
+fr_view = transpose_with_threshold(results, 0.09)
 
-with open("trace_variant3.csv", "w", newline="") as file:
+with open("p2_trace_variant3.csv", "w", newline="") as file:
     writer = csv.writer(file)
     for fr, values in fr_view.items():
         writer.writerow([fr] + values)
