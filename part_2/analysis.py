@@ -9,8 +9,8 @@ To run this analysis use 'python -m part2.analysis' in root directory
 4. Cosine similarity sorting
 5. Final analysis
 """
-from variants import variant1, variant2, variant3
-from functions import tf_idf_cosine, merge_sort, transpose_with_threshold
+from methods.variants import variant1, variant2, variant3
+from methods.functions import tf_idf_cosine, merge_sort, transpose_with_threshold
 import csv
 
 """

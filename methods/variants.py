@@ -38,7 +38,7 @@ def get_wordnet_pos(tag):
         return wordnet.ADV
     return wordnet.NOUN
 
-def wordnet_expansion(word, POS, num_synonyms):
+def wordnet_expansion(word, POS, num_synonyms=1):
     synonyms = set()
 
     # Only use the synset that has the common meaning for the Part of Speech (...[:1])
@@ -54,27 +54,9 @@ def wordnet_expansion(word, POS, num_synonyms):
 
 """
 PRE-PROCESSING
-The 1st of the 3 variants will only use tokenization
+The 1st of the 3 variants will use tokenization and remove stop words
 """
 def variant1(info: dict):
-    result = {}
-    key_list = []
-    text_list = []
-
-    for id, text in info.items():
-        result[id] = word_tokenize(text)
-    
-    for key in result:
-        key_list.append(key)
-        text_list.append(" ".join(result[key]))
-    
-    return key_list, text_list
-
-"""
-PRE-PROCESSING
-The 2nd of the 3 variants will use tokenization and remove stop words
-"""
-def variant2(info: dict):
     result = {}
     key_list = []
     text_list = []
@@ -92,7 +74,36 @@ def variant2(info: dict):
 
 """
 PRE-PROCESSING
-The 3rd of the 3 variants will use tokenization, remove stop words and punctuation, and lemmatizes based on Parts-of-Speech tags
+The 1st of the 3 variants will use tokenization, remove stop words, and lemmatize words based on POS tags
+"""
+def variant2(info: dict):
+    result = {}
+    key_list = []
+    text_list = []
+
+    stop_words = set(stopwords.words("english"))
+    lemmatizer = WordNetLemmatizer()
+
+    for id, text in info.items():
+        tokens = word_tokenize(text.lower())
+        tagged = pos_tag(tokens)
+
+        lemmatized = [lemmatizer.lemmatize(word, get_wordnet_pos(pos))
+                       for word, pos in tagged
+                       if word.isalpha() and word not in stop_words]
+        
+        result[id] = lemmatized
+
+    for key in result:
+        key_list.append(key)
+        text_list.append(" ".join(result[key]))
+
+    return key_list, text_list
+
+"""
+PRE-PROCESSING
+The 3rd of the 3 variants will use tokenization, remove stop words and punctuation, lemmatizes based on POS tags, 
+and adds word net expansion
 """
 def variant3(info: dict):
     result = {}
@@ -113,7 +124,7 @@ def variant3(info: dict):
                 lemma = lemmatizer.lemmatize(word, pos) 
                 expanded.append(lemma)
 
-                synonyms = wordnet_expansion(lemma, pos, 1)
+                synonyms = wordnet_expansion(lemma, pos)
                 expanded.extend(synonyms)
         
         result[id] = expanded
