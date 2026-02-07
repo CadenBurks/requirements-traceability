@@ -87,8 +87,9 @@ with full_path.open("w", newline="") as file:
 STEP 5: Final Analysis
     The results are transposed to match the format of the given trace results.
     
-    The similarity traces are not as accurate for this variant since tokenization and removing stop words do
-not account for words being in different forms and for words that have synonyms across documents.
+    The similarity traces show that the NFRs and FRs are not very similar, this is because the amount of features
+that software like ZOOM have. A large amount of functional requirements leads to less similarity with a small amount of
+non-functional requirements.
 """
 fr_view = transpose_with_threshold(results, 0.09)
 
@@ -207,11 +208,9 @@ with full_path.open("w", newline="") as file:
 STEP 5: Final Analysis
     The results are transposed to match the format of the given trace results.
     
-    This is the most effective variant of the 3 that were tested. Lemmatization helps with matching words
-that have different forms so if a word is in different forms between requirements they can
-still be seen as similar, and POS tagging helps lemmatize words using the proper form like nouns, verbs, etc. 
-The addition word net expansion results in lower similarity scores but the similarities are being traced by the meaning
-of the words more than the other vairants.
+    This is not as effective as the previous variants. Since there is so much variety in the features, adding a
+word net expansion only widens the gap between NFR and FR similarity. Accounting for synonyms does not amount to much
+considering lack of similar words between NFRs and FRs in the first place.
 """
 fr_view = transpose_with_threshold(results, 0.14)
 
