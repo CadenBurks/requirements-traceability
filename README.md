@@ -2,7 +2,7 @@
 
 ## Running the analyses
 1. Make sure you are in the root directory of the repository
-   - Any additional download requirments can be found in 'methods/variants.py'
+   - Any additional download requirements can be found in 'methods/variants.py'
 3. Run either 'python -m part_1.analysis' or 'python part_2.analysis'
 4. The output in the terminal will show the TF-IDF scores followed by the cosine similarity scores.
 5. Each variant will ask for the top N results that you want to see after sorting.
