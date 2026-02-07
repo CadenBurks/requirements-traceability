@@ -25,6 +25,7 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords, wordnet
 from nltk.stem import WordNetLemmatizer
 from nltk import pos_tag
+from pathlib import Path
 
 
 def get_wordnet_pos(tag):
@@ -56,7 +57,7 @@ def wordnet_expansion(word, POS, num_synonyms=1):
 PRE-PROCESSING
 The 1st of the 3 variants will use tokenization and remove stop words
 """
-def variant1(info: dict):
+def variant1(info: dict, output_path: Path):
     result = {}
     key_list = []
     text_list = []
@@ -70,13 +71,17 @@ def variant1(info: dict):
         key_list.append(key)
         text_list.append(" ".join(result[key]))
     
+    full_path = output_path / Path("preprocessing_variant1.txt")
+    with open(full_path, "w") as file:
+        for k, r in result.items():
+            file.write(f"{k}: {r}\n")
     return key_list, text_list
 
 """
 PRE-PROCESSING
 The 1st of the 3 variants will use tokenization, remove stop words, and lemmatize words based on POS tags
 """
-def variant2(info: dict):
+def variant2(info: dict, output_path: Path):
     result = {}
     key_list = []
     text_list = []
@@ -98,6 +103,10 @@ def variant2(info: dict):
         key_list.append(key)
         text_list.append(" ".join(result[key]))
 
+    full_path = output_path / Path("preprocessing_variant2.txt")
+    with open(full_path, "w") as file:
+        for k, r in result.items():
+            file.write(f"{k}: {r}\n")
     return key_list, text_list
 
 """
@@ -105,7 +114,7 @@ PRE-PROCESSING
 The 3rd of the 3 variants will use tokenization, remove stop words and punctuation, lemmatizes based on POS tags, 
 and adds word net expansion
 """
-def variant3(info: dict):
+def variant3(info: dict, output_path: Path):
     result = {}
     key_list = []
     text_list = []
@@ -133,4 +142,8 @@ def variant3(info: dict):
         key_list.append(key)
         text_list.append(" ".join(result[key]))
 
+    full_path = output_path / Path("preprocessing_variant3.txt")
+    with open(full_path, "w") as file:
+        for k, r in result.items():
+            file.write(f"{k}: {r}\n")
     return key_list, text_list

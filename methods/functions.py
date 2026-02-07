@@ -5,11 +5,20 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 
-def tf_idf_cosine(info, variant_function):
-    keys, preprocessed_text = variant_function(info)
+def tf_idf_cosine(info, output_path, variant_function):
+    keys, preprocessed_text = variant_function(info, output_path)
     vectorizer = TfidfVectorizer()
 
     tf_idf_matrix = vectorizer.fit_transform(preprocessed_text)
+    # feature_names = vectorizer.get_feature_names_out()
+    # print("TF-IDF RESULT:")
+    # for req_idx in range(tf_idf_matrix.shape[0]):
+    #     row = tf_idf_matrix[req_idx]
+    #     for col_idx, value in zip(row.indices, row.data):
+    #         if req_idx in [0, 1, 2]:
+    #             print(f"NFR {req_idx + 1}, Word '{feature_names[col_idx]}': {value:.3f}")
+    #         else:
+    #             print(f"FR {req_idx - 2}, Word '{feature_names[col_idx]}': {value:.3f}")
 
     similarity = cosine_similarity(tf_idf_matrix)
 

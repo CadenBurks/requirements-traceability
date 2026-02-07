@@ -57,7 +57,7 @@ from the previous step.
     Finally, a dictionary is made that holds the similarity scores between each NFR and all FRs. Only the NFR x FR relationship
 is used, so no NFR x NFR or FR x FR result is held.
 """
-results = tf_idf_cosine(info, variant1)
+results = tf_idf_cosine(info, results_directory, variant1)
 
 """
 STEP 4: Merge Sort
@@ -116,7 +116,7 @@ from the previous step.
     Finally, a dictionary is made that holds the similarity scores between each NFR and all FRs. Only the NFR x FR relationship
 is used, so no NFR x NFR or FR x FR result is held.
 """
-results = tf_idf_cosine(info, variant2)
+results = tf_idf_cosine(info, results_directory, variant2)
 
 """
 STEP 4: Merge Sort
@@ -177,7 +177,7 @@ from the previous step.
     Finally, a dictionary is made that holds the similarity scores between each NFR and all FRs. Only the NFR x FR relationship
 is used, so no NFR x NFR or FR x FR result is held.
 """
-results = tf_idf_cosine(info, variant3)
+results = tf_idf_cosine(info, results_directory, variant3)
 
 """
 STEP 4: Merge Sort

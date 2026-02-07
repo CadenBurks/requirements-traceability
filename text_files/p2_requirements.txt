@@ -1,0 +1,125 @@
+NFR1 (Operational): End of support for Zoom Workplace app for Windows 32-bit 
+
+NFR2 (Usability): Enhanced navigation framework for iPad and Android tablets 
+
+NFR3 (Security): Passkey authentication for passwordless sign-in
+
+FR1: The system prompts users for Face ID, fingerprint, or PIN to create and use passkeys 
+
+FR2: Users can sign in to Zoom using passkeys, a passwordless authentication method that replaces traditional passwords with cryptographic key pairs. 
+
+FR3: Global search allows users to search across contacts, messages, chats and channels, meetings, SMS messages, files, docs, and whiteboards from one unified experience. 
+
+FR4: Users can scan a QR code to authenticate using their mobile device. 
+
+FR5: Allow in-meeting questions with AI Companion to be archived 
+
+FR6: Hosts can control watermark visibility separately for shared content and video feeds during meetings. 
+
+FR7: Users can access meeting cards through the Resources tab in both direct messages (DMs) and continuous meeting chats (CMCs). 
+
+FR8: Users can access an updated Activity Center on desktop that offers a clearer, more organized view of their notifications. 
+
+FR9: Users can access global search through the search icon in the navigation bar on all primary tabs of the Zoom Workplace mobile app. 
+
+FR10: Users can wirelessly discover and connect nearby Zoom Rooms to their meetings directly from their Zoom Workplace desktop app. 
+
+FR11: The icon remains visible regardless of scroll position and opens the Global Search screen when tapped. 
+
+FR12: When you click a contact, their profile card will open in a right panel, showing their contact information and organization chart. 
+
+FR13: Users see clear contextual messages when prompted to scan QR codes or enter room codes in Zoom Rooms. 
+
+FR14: Users can access an updated Activity Center on desktop that offers a clearer, more organized view of their notifications. 
+
+FR15: Users can pin Zoom native links, such as chats, channels, clips, recordings, and surveys to chat tabs, and these links display with the correct icons and titles. 
+
+FR16: Users in continuous meeting chat (CMC) channels can consistently view meeting details through a permanently visible hyperlink. 
+
+FR17: Users can reposition the Zoom Clips recorder window during recording sessions, and the system automatically remembers this position for future recordings. 
+
+FR18: Users can customize which tabs appear in the main tab bar 
+
+FR19: Users can access Zoom Clips playlists on mobile devices. When mobile users open a playlist link, they automatically jump to the first playable clip. 
+
+FR20: Users can insert manual pauses ranging from 1 to 5 seconds at specific points within their avatar scripts. 
+
+FR21: Users can enable speech-to-text captions on their mobile clients to read Push to Talk (PTT) audio messages as translated text, providing accessibility support for users with hearing challenges or in noisy environments. 
+
+FR22: Users can receive email notifications when someone sends them an SMS message through Zoom Phone. 
+
+FR23: Users can merge multiple call legs into a single multi-party call when using remote control for their assigned Poly Edge-E IP phones through the Zoom Workplace desktop app. 
+
+FR24: Account owners and admins can access comprehensive auto receptionist improvements that enhance call routing capabilities and system usability. 
+
+FR25: Admins and users can access expanded language options for Zoom Phone's transcription and voice processing features, supporting global communication needs more effectively. 
+
+FR26: Users will receive active in-call prompts that support catch-up summaries, decision tracking, and action item identification. 
+
+FR27: Users of CRM integrations with Zoom Phone can access essential call controls directly within the notes and disposition screens. 
+
+FR28: Users can utilize a specialized user interface for Zoom Phone on Android devices used in retail environments through the Shared Mobile Experience (SME). 
+
+FR29: Account owners and admins can enable conversational voicemails, allowing users to broadcast voice or video messages to multiple recipients simultaneously through admin-defined groups or company-wide distribution, with automatic encryption through Customer Managed Keys (CMK) when enabled 
+
+FR30: Users can transfer callers directly to the original callee's voicemail when handling calls that have been transferred, forwarded, or overflowed from another user. 
+
+FR31: Users can provide detailed context with the AI Companion call summary feature when transferring calls, so recipients have complete information before answering. 
+
+FR32: Users receive AI-generated task recommendations based on their call summaries and can create tasks manually using a dedicated button that opens the task creation dialog.  
+
+FR33: Users can automatically save AI Companion live summaries from Zoom Phone calls directly into Zoom Doc 
+
+FR34: Users can create Zoom Tasks directly from their voicemail transcriptions using AI-powered extraction capabilities. 
+
+FR35: Agents can send scheduled callback links to consumers during active voice engagement. 
+
+FR36: Consumers can copy and paste images directly into Zoom Contact Center web chat windows using right-click paste or keyboard shortcuts (Ctrl+V, Mac+V). 
+
+FR37: With the running late notification feature, users in a current Zoom Meeting can notify participants of an upcoming meeting that they will be late. 
+
+FR38: Users can transfer ongoing meeting from their Zoom Workplace mobile app to a Zoom Room through a simplified one-tap process. 
+
+FR39: Users can reset their presence status in the Zoom Workplace app through the Reset option in the presence menu. 
+
+FR40: Agents can specify their next status while their agent status is set to an Occupied state. 
+
+FR41: Mobile users can create Clips avatars using text-to-avatar generation in their mobile device. 
+
+FR42: Users can access Recent in addition to My clips and Shared with me when streaming clips during meetings or webinars. 
+
+FR43: Users can automatically resend failed messages when network connectivity is restored. 
+
+FR44: Users can search for messages within their current chat or channel context through a persistent search entry point available directly in individual conversation views on mobile app. 
+
+FR45: Users can translate entire message threads with a single action using the new Translate thread to {language} option that appears on the first message in a thread. 
+
+FR46: Users can reply to Zoom Team Chat messages and Zoom meeting reminders directly from the notifications they receive on the mobile app. 
+
+FR47: Users can add and remove images and attachments when editing messages on mobile app. 
+
+FR48: Meeting participants can create and update tasks from the in-meeting chat using a new Tasks option. 
+
+FR49: Users can share Video Management channels directly with Team Chat channels through an enhanced share sheet with search functionality. 
+
+FR50: Admins can configure user roles that disable access to the dialpad in both the Zoom Contact Center desktop app and CTI connector. 
+
+FR51: Zoom Contact Center (ZCC) agents can now manage customer interactions directly from their iOS or Android mobile phone devices using the ZCC mobile app. 
+
+FR52: Users can create clips directly from meeting recordings through the Meeting Card interface. 
+
+FR53: Users can create and manage custom avatars directly from the Clips main page on Zoom Workplace app for desktop. 
+
+FR54: Users can control when shared clips begin playing during meetings. 
+
+FR55: Viewers can export a clip's full transcripts as SRT or VTT file using the Download transcript button shown in the transcript panel. 
+
+FR56: Users can see a live character counter when composing messages with Zoom AI Companion, showing their input against the 1,000-character limit. 
+
+FR57: Meeting hosts can enable continuous meeting chat when scheduling meetings that require registration. 
+
+FR58: Users can experience automated captions generated on their eligible devices in these additional languages. 
+
+FR59: During a meeting, members of the Continuous Meeting Chat (CMC) can @mention other members who are not currently participating in the meeting. 
+
+FR60: Meeting participants can use GIPHY to send GIFs in meeting chat. 
